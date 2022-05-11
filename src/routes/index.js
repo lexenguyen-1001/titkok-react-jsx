@@ -1,31 +1,39 @@
-import { HeaderOnly } from '~/components/Layout';
+import { DefaultLayout, HeaderOnly } from '~/components/Layout';
 
 import Home from '~/page/Home';
 import Upload from '~/page/Upload';
 import Profile from '~/page/Profile';
 import Following from '~/page/Following';
 
-// Public routes
-export const publicRoutes = [
+const routes = [
     {
-        path: '/',
-        component: Home,
+        // Use DefaultLayout
+        element: <DefaultLayout />,
+        children: [
+            {
+                path: '/',
+                element: <Home />,
+            },
+            {
+                path: '/following',
+                element: <Following />,
+            },
+        ],
     },
     {
-        path: '/following',
-        component: Following,
+        // Use HeaderOnly
+        element: <HeaderOnly />,
+        children: [
+            {
+                path: '/upload',
+                element: <Upload />,
+            },
+        ],
     },
     {
         path: '/profile',
-        component: Profile,
-        layout: HeaderOnly,
-    },
-    {
-        path: '/upload',
-        component: Upload,
-        layout: null,
+        element: <Profile />,
     },
 ];
 
-// Private routes
-export const privateRoutes = [];
+export default routes;
