@@ -7,9 +7,9 @@ import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
-function MenuItem({ data }) {
+function MenuItem({ data, onClick }) {
     return (
-        <Button to={data.to} className={cx('menu-item')}>
+        <Button className={cx('menu-item')} to={data.to} onClick={onClick}>
             {data.icon} {data.title}
         </Button>
     );
@@ -17,10 +17,12 @@ function MenuItem({ data }) {
 
 MenuItem.propTypes = {
     data: PropTypes.object,
+    onClick: PropTypes.func,
 };
 
 MenuItem.defaultProps = {
     data: {},
+    onClick: () => {},
 };
 
 export default MenuItem;
