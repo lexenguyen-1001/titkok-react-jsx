@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-import Tippy from '@tippyjs/react/headless';
+import TippyHeadless from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
+
+import 'tippy.js/dist/tippy.css';
 
 import { ReactComponent as Logo } from '~/assets/svg/logo.svg';
 import { ReactComponent as Search } from '~/assets/svg/search.svg';
@@ -11,15 +14,20 @@ import { ReactComponent as Ellipse } from '~/assets/svg/ellipse-vertical.svg';
 import { ReactComponent as Language } from '~/assets/svg/language.svg';
 import { ReactComponent as Help } from '~/assets/svg/help.svg';
 import { ReactComponent as Keyboard } from '~/assets/svg/keyboard.svg';
+import { ReactComponent as User } from '~/assets/svg/user.svg';
+import { ReactComponent as Coin } from '~/assets/svg/tiktok.svg';
+import { ReactComponent as Analytic } from '~/assets/svg/analytic.svg';
+import { ReactComponent as Setting } from '~/assets/svg/setting.svg';
+import { ReactComponent as Logout } from '~/assets/svg/logout.svg';
 
 import useToggle from '~/hooks/useToggle';
 
 import { Wrapper as PopperWrapper } from '~/components/Popper';
-
-import styles from './Header.module.scss';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
+
+import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -53,9 +61,41 @@ const MENU_ITEMS = [
     },
 ];
 
+const USER_MENU_ITEMS = [
+    {
+        icon: <User />,
+        title: 'View profile',
+        to: '/feedback',
+    },
+    {
+        icon: <Coin />,
+        title: 'Get coins',
+        to: '/feedback',
+    },
+    {
+        icon: <Analytic />,
+        title: 'View Analytics',
+        to: '/feedback',
+    },
+    {
+        icon: <Setting />,
+        title: 'Setting',
+        to: '/feedback',
+    },
+    ...MENU_ITEMS,
+    {
+        icon: <Logout />,
+        title: 'Log out',
+        to: '/feedback',
+        separate: true,
+    },
+];
+
 function Header() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
+
+    const currentUser = true;
 
     const [isInputFocus, setIsInputFocus] = useToggle();
 
@@ -95,7 +135,7 @@ function Header() {
                     <Logo />
                 </div>
 
-                <Tippy
+                <TippyHeadless
                     visible={searchResult.length > 0}
                     interactive
                     render={(attrs) => (
@@ -138,16 +178,25 @@ function Header() {
                             </button>
                         </form>
                     </div>
-                </Tippy>
+                </TippyHeadless>
+
                 <div className={cx('actions')}>
                     <Button outlined>
                         <Plus /> Upload
                     </Button>
                     <Button primary>Log in</Button>
-                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-                        <button className={cx('more-btn')}>
-                            <Ellipse />
-                        </button>
+                    <Menu items={currentUser ? USER_MENU_ITEMS : MENU_ITEMS} onChange={handleMenuChange}>
+                        {currentUser ? (
+                            <img
+                                className={cx('current-user')}
+                                src="https://source.unsplash.com/random"
+                                alt="Lexe Dev"
+                            />
+                        ) : (
+                            <button className={cx('more-btn')}>
+                                <Ellipse />
+                            </button>
+                        )}
                     </Menu>
                 </div>
             </div>

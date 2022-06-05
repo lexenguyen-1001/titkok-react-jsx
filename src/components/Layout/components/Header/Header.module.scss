@@ -120,3 +120,12 @@
 
     background-color: transparent;
 }
+
+.current-user {
+    width: 32px;
+    height: 32px;
+    margin-left: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}

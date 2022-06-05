@@ -38,10 +38,12 @@ function Menu({ children, items, onChange }) {
             interactive
             placement="bottom-end"
             delay={[0, 700]}
+            offset={[12, 8]}
+            onHide={() => setHistory((prev) => prev.slice(0, 1))}
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
                     <PopperWrapper className={cx('menu-popper')}>
-                        {current.title && (
+                        {history.length > 1 && (
                             <Header
                                 title={current.title}
                                 onBack={() => setHistory((prevState) => prevState.slice(0, prevState.length - 1))}
