@@ -28,6 +28,7 @@ import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 
 import styles from './Header.module.scss';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -131,9 +132,9 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('logo')}>
+                <Button to="/" className={cx('logo')}>
                     <Logo />
-                </div>
+                </Button>
 
                 <TippyHeadless
                     visible={searchResult.length > 0}
@@ -184,14 +185,10 @@ function Header() {
                     <Button outlined>
                         <Plus /> Upload
                     </Button>
-                    <Button primary>Log in</Button>
+                    {!currentUser && <Button primary>Log in</Button>}
                     <Menu items={currentUser ? USER_MENU_ITEMS : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
-                                className={cx('current-user')}
-                                src="https://source.unsplash.com/random"
-                                alt="Lexe Dev"
-                            />
+                            <Image className={cx('current-user')} />
                         ) : (
                             <button className={cx('more-btn')}>
                                 <Ellipse />
