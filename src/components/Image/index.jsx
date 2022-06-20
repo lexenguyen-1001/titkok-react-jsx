@@ -8,8 +8,23 @@ import styles from './Image.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Image({ src, alt, className, fallback = noImage, ...rest }, ref) {
-    return <img className={cx('wrapper', className)} ref={ref} src={src || fallback} alt={alt} {...rest} />;
+function Image({ src = noImage, alt, className, fallback: customFallback, ...rest }, ref) {
+    const [fallback, setFallback] = useState();
+
+    const handleError = () => {
+        setFallback(customFallback || noImage);
+    };
+
+    return (
+        <img
+            className={cx('wrapper', className)}
+            ref={ref}
+            src={fallback || src}
+            alt={alt}
+            {...rest}
+            onError={handleError}
+        />
+    );
 }
 
 export default forwardRef(Image);

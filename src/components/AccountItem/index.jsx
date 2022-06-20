@@ -1,34 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 
 import { ReactComponent as CheckIcon } from '~/assets/svg/check.svg';
+
+import Image from '~/components/Image';
 
 import styles from './AccountItem.module.scss';
 
 const cx = classNames.bind(styles);
 
-function AccountItem({ avatar }) {
+function AccountItem({ data, to }) {
     return (
-        <div className={cx('wrapper')}>
-            <img className={cx('avatar')} src={avatar} alt="hoa" />
+        <Link to={to} className={cx('wrapper')}>
+            <Image
+                className={cx('avatar')}
+                src={data.avatar}
+                alt="hoa"
+                fallback="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            />
             <div className={cx('info')}>
                 <h4 className={cx('name')}>
-                    <span>Nguyen Van A</span>
-                    <CheckIcon />
+                    <span>{data.full_name}</span>
+                    {data.tick && <CheckIcon />}
                 </h4>
-                <span className={cx('username')}>nguyenvana</span>
+                <span className={cx('username')}>{data.nickname}</span>
             </div>
-        </div>
+        </Link>
     );
 }
 
 AccountItem.propTypes = {
-    avatar: PropTypes.string,
+    data: PropTypes.object.isRequired,
+    to: PropTypes.string,
 };
 
 AccountItem.defaultProps = {
-    avatar: 'https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/ea0854578085ab26effc2c7b8cefa270~c5_100x100.jpeg?x-expires=1654502400&x-signature=amM2iMXwj8tVMHhDtFYwAXY7h48%3D',
+    to: '/@',
 };
 
 export default AccountItem;

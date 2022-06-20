@@ -15,7 +15,7 @@ const routes = [
                 element: <Home />,
             },
             {
-                path: '/following',
+                path: 'following',
                 element: <Following />,
             },
         ],
@@ -25,14 +25,24 @@ const routes = [
         element: <HeaderOnly />,
         children: [
             {
-                path: '/upload',
+                path: 'upload',
                 element: <Upload />,
             },
         ],
     },
     {
-        path: '/profile',
-        element: <Profile />,
+        path: '/@:nickname',
+        element: <DefaultLayout />,
+        children: [
+            {
+                path: '',
+                element: <Profile />,
+            },
+        ],
+    },
+    {
+        path: '*',
+        element: <>404! Not found</>,
     },
 ];
 
