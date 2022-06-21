@@ -4,7 +4,7 @@ import Tippy from '@tippyjs/react';
 
 import 'tippy.js/dist/tippy.css';
 
-import routesConfig from '~/config/routes';
+import config from '~/config';
 
 import { ReactComponent as Logo } from '~/assets/svg/logo.svg';
 import { ReactComponent as PlusIcon } from '~/assets/svg/plus.svg';
@@ -104,7 +104,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Button to={routesConfig.home} className={cx('logo')}>
+                <Button to={config.routes.home} className={cx('logo')}>
                     <Logo />
                 </Button>
                 <Search />
