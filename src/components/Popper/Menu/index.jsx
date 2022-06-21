@@ -11,7 +11,7 @@ import Header from './Header';
 
 const cx = classNames.bind(styles);
 
-function Menu({ children, items, onChange }) {
+function Menu({ children, hideOnClick, items, onChange }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
 
@@ -36,6 +36,7 @@ function Menu({ children, items, onChange }) {
     return (
         <Tippy
             interactive
+            hideOnClick={hideOnClick}
             placement="bottom-end"
             delay={[0, 700]}
             offset={[12, 8]}
@@ -60,11 +61,13 @@ function Menu({ children, items, onChange }) {
 }
 
 Menu.propTypes = {
+    hideOnClick: PropTypes.bool,
     items: PropTypes.array,
     onChange: PropTypes.func,
 };
 
 Menu.defaultProps = {
+    hideOnClick: false,
     items: [],
     onChange: () => {},
 };

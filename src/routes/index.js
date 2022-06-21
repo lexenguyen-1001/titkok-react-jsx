@@ -1,9 +1,12 @@
+import routesConfig from '~/config/routes';
+
 import { DefaultLayout, HeaderOnly } from '~/components/Layout';
 
 import Home from '~/page/Home';
+import Search from '~/page/Search';
+import Following from '~/page/Following';
 import Upload from '~/page/Upload';
 import Profile from '~/page/Profile';
-import Following from '~/page/Following';
 
 const routes = [
     {
@@ -11,11 +14,15 @@ const routes = [
         element: <DefaultLayout />,
         children: [
             {
-                path: '/',
+                path: routesConfig.home,
                 element: <Home />,
             },
             {
-                path: 'following',
+                path: routesConfig.search,
+                element: <Search />,
+            },
+            {
+                path: routesConfig.following,
                 element: <Following />,
             },
         ],
@@ -25,13 +32,13 @@ const routes = [
         element: <HeaderOnly />,
         children: [
             {
-                path: 'upload',
+                path: routesConfig.upload,
                 element: <Upload />,
             },
         ],
     },
     {
-        path: '/@:nickname',
+        path: routesConfig.profile,
         element: <DefaultLayout />,
         children: [
             {

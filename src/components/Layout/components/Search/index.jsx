@@ -43,6 +43,14 @@ function Search(props) {
         setIsInputFocus(false);
     };
 
+    const handleInputChange = (e) => {
+        const searchValue = e.target.value || '';
+
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    };
+
     useClickOutside(searchRef, () => {
         setIsInputFocus(false);
     });
@@ -95,9 +103,7 @@ function Search(props) {
                         placeholder="Search accounts and videos"
                         spellCheck={false}
                         value={searchValue}
-                        onChange={(e) => {
-                            setSearchValue(e.target.value.trim() ? e.target.value : '');
-                        }}
+                        onChange={handleInputChange}
                         onFocus={handleFocusInput}
                     />
                     {searchValue && !loading && (

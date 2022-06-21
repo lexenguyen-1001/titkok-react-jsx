@@ -4,8 +4,9 @@ import Tippy from '@tippyjs/react';
 
 import 'tippy.js/dist/tippy.css';
 
-import { ReactComponent as Logo } from '~/assets/svg/logo.svg';
+import routesConfig from '~/config/routes';
 
+import { ReactComponent as Logo } from '~/assets/svg/logo.svg';
 import { ReactComponent as PlusIcon } from '~/assets/svg/plus.svg';
 import { ReactComponent as EllipseIcon } from '~/assets/svg/ellipse-vertical.svg';
 import { ReactComponent as LanguageIcon } from '~/assets/svg/language.svg';
@@ -92,8 +93,6 @@ function Header() {
     const currentUser = true;
 
     const handleMenuChange = (menuItem) => {
-        console.log(menuItem);
-
         switch (menuItem.type) {
             case 'language':
                 break;
@@ -105,7 +104,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Button to="/" className={cx('logo')}>
+                <Button to={routesConfig.home} className={cx('logo')}>
                     <Logo />
                 </Button>
                 <Search />
