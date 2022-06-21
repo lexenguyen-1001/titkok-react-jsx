@@ -5,7 +5,7 @@ import TippyHeadless from '@tippyjs/react/headless';
 
 import { useClickOutside, useDebounce } from '~/hooks';
 
-import * as searchServices from '~/apiServices/searchServices';
+import * as searchServices from '~/services/searchServices';
 
 import { ReactComponent as SearchIcon } from '~/assets/svg/search.svg';
 import { ReactComponent as ClearIcon } from '~/assets/svg/close-fill.svg';
@@ -25,7 +25,6 @@ function Search(props) {
     const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
-    const searchRef = useRef();
 
     const debounced = useDebounce(searchValue, 500);
 
@@ -50,10 +49,6 @@ function Search(props) {
             setSearchValue(searchValue);
         }
     };
-
-    useClickOutside(searchRef, () => {
-        setIsInputFocus(false);
-    });
 
     useEffect(() => {
         if (!debounced.trim()) {
@@ -81,10 +76,10 @@ function Search(props) {
     }, [debounced]);
 
     return (
-        <div className={cx('search', { focus: isInputFocus })} ref={searchRef}>
+        <div className={cx('search', { focus: isInputFocus })}>
             <TippyHeadless
-                visible={searchResult.length > 0 && isInputFocus}
                 interactive
+                visible={searchResult.length > 0 && isInputFocus}
                 onClickOutside={handleBlurInput}
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
