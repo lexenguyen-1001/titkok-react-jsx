@@ -130,7 +130,7 @@ function Header() {
                     )}
                     <Menu items={currentUser ? USER_MENU_ITEMS : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <Image className={cx('current-user')} />
+                            <Image className={cx('current-user')} alt="User Logged" />
                         ) : (
                             <button className={cx('more-btn')}>
                                 <EllipseIcon />
