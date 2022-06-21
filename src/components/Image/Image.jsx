@@ -31,7 +31,7 @@ Image.propTypes = {
     src: PropTypes.string,
     alt: PropTypes.string.isRequired,
     classNames: PropTypes.string,
-    fallback: PropTypes.func,
+    fallback: PropTypes.string,
 };
 
 Image.defaultProps = {

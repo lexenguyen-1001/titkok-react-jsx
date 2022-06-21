@@ -25,7 +25,7 @@ function Search() {
 
     const inputRef = useRef();
 
-    const debounced = useDebounce(searchValue, 500);
+    const debouncedValue = useDebounce(searchValue, 500);
 
     const handleClearSearch = () => {
         setSearchValue('');
@@ -50,7 +50,7 @@ function Search() {
     };
 
     useEffect(() => {
-        if (!debounced.trim()) {
+        if (!debouncedValue.trim()) {
             return setSearchResult([]);
         }
 
@@ -60,7 +60,7 @@ function Search() {
             const fetchApi = async () => {
                 setLoading(true);
 
-                const result = await searchServices.search(debounced);
+                const result = await searchServices.search(debouncedValue);
                 setSearchResult(result);
 
                 setLoading(false);
@@ -72,7 +72,7 @@ function Search() {
         return () => {
             clearTimeout(getDataTimeout);
         };
-    }, [debounced]);
+    }, [debouncedValue]);
 
     return (
         <div className={cx('search', { focus: isInputFocus })}>

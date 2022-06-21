@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 
 import styles from './Button.module.scss';
-import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function Button({ primary, outlined, to, href, size, className, children, onClick, ...passProps }) {
-    let Comp = 'button';
     const props = {
         onClick,
         ...passProps,
     };
+    const classes = cx('wrapper', { primary, outlined }, size, className);
+
+    let Comp = 'button';
 
     if (to) {
         props.to = to;
@@ -21,8 +23,6 @@ function Button({ primary, outlined, to, href, size, className, children, onClic
         props.href = href;
         Comp = 'a';
     }
-
-    const classes = cx('wrapper', { primary, outlined }, size, className);
 
     return (
         <Comp className={cx(classes)} {...props}>
