@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import TippyHeadless from '@tippyjs/react/headless';
 
-import { useClickOutside, useDebounce } from '~/hooks';
+import { useDebounce } from '~/hooks';
 
 import * as searchServices from '~/services/searchServices';
 
@@ -18,7 +17,7 @@ import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Search(props) {
+function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [isInputFocus, setIsInputFocus] = useState();
     const [searchResult, setSearchResult] = useState([]);
@@ -86,7 +85,7 @@ function Search(props) {
                         <PopperWrapper>
                             <h4 className={cx('search-title')}>Accounts</h4>
                             {searchResult.map((result) => (
-                                <AccountItem key={result.id} data={result} to={`/@${result.nickname}`} />
+                                <AccountItem key={result.id} data={result} />
                             ))}
                         </PopperWrapper>
                     </div>
@@ -121,9 +120,5 @@ function Search(props) {
         </div>
     );
 }
-
-Search.propTypes = {};
-
-Search.defaultProps = {};
 
 export default Search;

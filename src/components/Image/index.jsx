@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 
 import noImage from '~/assets/images/no-image.png';
 
@@ -8,7 +8,7 @@ import styles from './Image.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Image({ src = noImage, alt, className, fallback: customFallback, ...rest }, ref) {
+const Image = forwardRef(({ src, alt, className, fallback: customFallback, ...rest }, ref) => {
     const [fallback, setFallback] = useState();
 
     const handleError = () => {
@@ -25,6 +25,17 @@ function Image({ src = noImage, alt, className, fallback: customFallback, ...res
             onError={handleError}
         />
     );
-}
+});
 
-export default forwardRef(Image);
+Image.propTypes = {
+    src: PropTypes.string,
+    alt: PropTypes.string.isRequired,
+    classNames: PropTypes.string,
+    fallback: PropTypes.func,
+};
+
+Image.defaultProps = {
+    src: noImage,
+};
+
+export default Image;

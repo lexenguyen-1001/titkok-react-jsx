@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import Header from '~/layouts/components/Header';
 
-function HeaderOnly({ children }) {
+function HeaderOnly() {
     return (
         <div>
             <Header />

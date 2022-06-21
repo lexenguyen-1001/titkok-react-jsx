@@ -32,6 +32,7 @@ function Button({ primary, outlined, to, href, size, className, children, onClic
 }
 
 Button.propTypes = {
+    children: PropTypes.node.isRequired,
     primary: PropTypes.bool,
     outlined: PropTypes.bool,
     to: PropTypes.string,

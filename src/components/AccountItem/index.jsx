@@ -11,9 +11,9 @@ import styles from './AccountItem.module.scss';
 
 const cx = classNames.bind(styles);
 
-function AccountItem({ data, to }) {
+function AccountItem({ data }) {
     return (
-        <Link to={to} className={cx('wrapper')}>
+        <Link to={`@${data.nickname}`} className={cx('wrapper')}>
             <Image
                 className={cx('avatar')}
                 src={data.avatar}
@@ -33,11 +33,6 @@ function AccountItem({ data, to }) {
 
 AccountItem.propTypes = {
     data: PropTypes.object.isRequired,
-    to: PropTypes.string,
-};
-
-AccountItem.defaultProps = {
-    to: '/@',
 };
 
 export default AccountItem;
